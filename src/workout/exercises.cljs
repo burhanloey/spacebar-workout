@@ -6,30 +6,27 @@
 
 (enable-console-print!)
 
-(def all-exercises {:warmup   {:rep 1
-                               :exercises {:stretches ["wall extensions"
-                                                       "band dislocates"
-                                                       "cat-camels" 
-                                                       "scapular shrugs"
-                                                       "full body circles"
-                                                       "front and side leg swings"
-                                                       "wrist mobility"]
-                                           :bodyline  ["plank"
-                                                       "side plank - right"
-                                                       "side plank - left"
-                                                       "reverse plank"
-                                                       "hollow hold"
-                                                       "arch hold"]}}
-                    :skill    {:rep 1
-                               :exercises ["handstand"
-                                           "support"]}
-                    :strength {:rep 3
-                               :exercises {:first     ["pullup"
-                                                       "dipping"]
-                                           :second    ["squat"
-                                                       "l-sit"]
-                                           :third     ["pushup"
-                                                       "row"]}}})
+(def all-exercises {:warmup   {:stretches ["wall extensions"
+                                           "band dislocates"
+                                           "cat-camels" 
+                                           "scapular shrugs"
+                                           "full body circles"
+                                           "front and side leg swings"
+                                           "wrist mobility"]
+                               :bodyline  ["plank"
+                                           "side plank - right"
+                                           "side plank - left"
+                                           "reverse plank"
+                                           "hollow hold"
+                                           "arch hold"]}
+                    :skill    ["handstand"
+                               "support"]
+                    :strength {:first     ["pullup"
+                                           "dipping"]
+                               :second    ["squat"
+                                           "l-sit"]
+                               :third     ["pushup"
+                                           "row"]}})
 
 (defonce current-exercise (r/atom nil))
 (defonce current-rep      (r/atom 0))
@@ -39,16 +36,16 @@
 
 (defn total-rep [name]
   (cond
-    (in? name (get-all-exercises :warmup))   (get-in all-exercises [:warmup :rep])
-    (in? name (get-all-exercises :skill))    (get-in all-exercises [:skill :rep])
-    (in? name (get-all-exercises :strength)) (get-in all-exercises [:strength :rep])
+    (in? name (get-all-exercises :warmup))   1
+    (in? name (get-all-exercises :skill))    1
+    (in? name (get-all-exercises :strength)) 3
     :else 0))
 
 (defn duration [name]
   (cond
-    (in? name (get-all-exercises :warmup :exercises :bodyline)) 60
-    (in? name (get-all-exercises :strength)) 60
-    (in? name (get-all-exercises :skill)) 300
+    (in? name (get-all-exercises :warmup :bodyline))  60
+    (in? name (get-all-exercises :strength))          60
+    (in? name (get-all-exercises :skill))            300
     :else 0))
 
 (defn do-exercise [target]
@@ -65,7 +62,7 @@
 
 (defn listing-names [stage & [type]]
   [:ul
-   (for [exercise (get-all-exercises stage :exercises type)]
+   (for [exercise (get-all-exercises stage type)]
      ^{:key exercise} [:li (str/capitalize (name exercise))])])
 
 (defn exercises-list [stage & types]
