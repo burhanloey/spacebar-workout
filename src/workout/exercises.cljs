@@ -34,8 +34,14 @@
 (defn get-all-exercises [& keys]
   (flatten (filter vector? (tree-seq map? vals (get-in all-exercises (remove nil? (apply vector keys)))))))
 
+(defn get-all-exercise-groups []
+  (filter vector? (tree-seq map? vals all-exercises)))
+
 (defn last-exercise? [name]
-  (in? name (map last (filter vector? (tree-seq map? vals all-exercises)))))
+  (in? name (map last (get-all-exercise-groups))))
+
+(defn first-exercise-from [name]
+  (apply first (filter #(in? name %) (get-all-exercise-groups))))
 
 (defn total-rep [name]
   (if (in? name (get-all-exercises :strength))
@@ -59,7 +65,6 @@
                               :next (first (get-all-exercises))
                               :prev (last (get-all-exercises))))]
     (reset! current-exercise target-exercise)
-    (reset! current-rep 1)
     (timer/set-timer (duration target-exercise))))
 
 (defn do-rep [target]
@@ -68,7 +73,21 @@
     :prev (reset! current-rep (inc (mod (- @current-rep 2) (total-rep @current-exercise))))))
 
 (defn go-with-the-flow []
-  )
+  (let [next-group (fn []
+                     (do-exercise :next)
+                     (reset! current-rep 1))
+        next-rep   (fn []
+                     (let [target-exercise (first-exercise-from @current-exercise)]
+                       (reset! current-exercise target-exercise)
+                       (do-rep :next)
+                       (timer/set-timer (duration target-exercise))))]
+    (cond
+      (and (last-exercise? @current-exercise)
+           (= @current-rep (total-rep @current-exercise))) (next-group)
+      
+      (last-exercise? @current-exercise) (next-rep)
+      
+      :else (do-exercise :next))))
 
 (defn listing-names [stage & [type]]
   [:ul

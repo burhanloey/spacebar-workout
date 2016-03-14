@@ -22,7 +22,7 @@
   (case code
     32 (do
          (reset! dingdong "Spacebar")
-         (timer/handle-click))
+         (exercises/go-with-the-flow))
     37 (do
          (reset! dingdong "Left")
          (exercises/do-rep :prev))
