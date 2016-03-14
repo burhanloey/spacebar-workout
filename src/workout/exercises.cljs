@@ -29,17 +29,18 @@
                                            "row"]}})
 
 (defonce current-exercise (r/atom nil))
-(defonce current-rep      (r/atom 0))
+(defonce current-rep      (r/atom 1))
 
 (defn get-all-exercises [& keys]
   (flatten (filter vector? (tree-seq map? vals (get-in all-exercises (remove nil? (apply vector keys)))))))
 
+(defn last-exercise? [name]
+  (in? name (map last (filter vector? (tree-seq map? vals all-exercises)))))
+
 (defn total-rep [name]
-  (cond
-    (in? name (get-all-exercises :warmup))   1
-    (in? name (get-all-exercises :skill))    1
-    (in? name (get-all-exercises :strength)) 3
-    :else 0))
+  (if (in? name (get-all-exercises :strength))
+    3
+    1))
 
 (defn duration [name]
   (cond
@@ -58,7 +59,17 @@
                               :next (first (get-all-exercises))
                               :prev (last (get-all-exercises))))]
     (reset! current-exercise target-exercise)
+    (reset! current-rep 1)
     (timer/set-timer (duration target-exercise))))
+
+(defn do-rep [target]
+  (case target
+    :next (reset! current-rep (inc (mod @current-rep (total-rep @current-exercise))))
+    :prev (reset! current-rep (inc (mod (- @current-rep 2) (total-rep @current-exercise))))))
+
+(defn go-with-the-flow []
+  ; TODO
+  )
 
 (defn listing-names [stage & [type]]
   [:ul

@@ -23,11 +23,15 @@
     32 (do
          (reset! dingdong "Spacebar")
          (timer/handle-click))
-    37 (reset! dingdong "Left")
+    37 (do
+         (reset! dingdong "Left")
+         (exercises/do-rep :prev))
     38 (do
          (reset! dingdong "Up")
          (exercises/do-exercise :prev))
-    39 (reset! dingdong "Right")
+    39 (do
+         (reset! dingdong "Right")
+         (exercises/do-rep :next))
     40 (do
          (reset! dingdong "Down")
          (exercises/do-exercise :next))))
