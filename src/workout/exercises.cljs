@@ -43,11 +43,11 @@
     1))
 
 (defn duration [name]
-  (cond
-    (in? name (get-all-exercises :warmup :bodyline))  60
-    (in? name (get-all-exercises :strength))          60
-    (in? name (get-all-exercises :skill))            300
-    :else 0))
+  (condp in? name
+    (get-all-exercises :warmup :bodyline)  60
+    (get-all-exercises :strength)          60
+    (get-all-exercises :skill)            300
+    0))
 
 (defn do-exercise [target]
   (let [find-target-while (case target
@@ -68,7 +68,6 @@
     :prev (reset! current-rep (inc (mod (- @current-rep 2) (total-rep @current-exercise))))))
 
 (defn go-with-the-flow []
-  ; TODO
   )
 
 (defn listing-names [stage & [type]]
