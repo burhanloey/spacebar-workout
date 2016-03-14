@@ -34,14 +34,14 @@
 (defn get-all-exercises [& keys]
   (flatten (filter vector? (tree-seq map? vals (get-in all-exercises (remove nil? (apply vector keys)))))))
 
-(defn get-all-exercise-groups []
+(defn get-exercises-by-group []
   (filter vector? (tree-seq map? vals all-exercises)))
 
 (defn last-exercise? [name]
-  (in? name (map last (get-all-exercise-groups))))
+  (in? name (map last (get-exercises-by-group))))
 
 (defn first-exercise-from [name]
-  (apply first (filter #(in? name %) (get-all-exercise-groups))))
+  (apply first (filter #(in? name %) (get-exercises-by-group))))
 
 (defn total-rep [name]
   (if (in? name (get-all-exercises :strength))
