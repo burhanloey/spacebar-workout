@@ -67,6 +67,7 @@
                               :next (first (get-all-exercises))
                               :prev (last (get-all-exercises))))]
     (reset! current-exercise target-exercise)
+    (reset! current-rep (inc (mod (dec @current-rep) (total-rep target-exercise))))
     (timer/set-timer (duration target-exercise))))
 
 (defn do-rep [target]
