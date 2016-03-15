@@ -29,14 +29,14 @@
     (:right keycode)    (exercises/do-rep :next)
     (:down keycode)     (exercises/do-exercise :next)))
 
-(defn test-event [e]
+(defn onkeydown-listener [e]
   (let [code (or (.-which e)
                  (.-keyCode e))]
     (when (in? code (vals keycode))
       (.preventDefault e)
       (handle-event code))))
 
-(set! (.-onkeydown js/document) test-event)
+(set! (.-onkeydown js/document) onkeydown-listener)
 
 ;; Figwheel related
 (defn on-js-reload []
