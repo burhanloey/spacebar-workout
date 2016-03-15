@@ -7,11 +7,14 @@
 
 (enable-console-print!)
 
-(defonce dingdong (r/atom "Hello Dingdong!"))
+(def keycode {:spacebar 32
+              :left     37
+              :up       38
+              :right    39
+              :down     40})
 
 (defn workout-app []
   [:div
-   [:p @dingdong]
    [timer/timer-component]
    [exercises/exercises-component]])
 
@@ -19,27 +22,17 @@
                     (. js/document (getElementById "app")))
 
 (defn handle-event [code]
-  (case code
-    32 (do
-         (reset! dingdong "Spacebar")
-         (exercises/go-with-the-flow))
-    37 (do
-         (reset! dingdong "Left")
-         (exercises/do-rep :prev))
-    38 (do
-         (reset! dingdong "Up")
-         (exercises/do-exercise :prev))
-    39 (do
-         (reset! dingdong "Right")
-         (exercises/do-rep :next))
-    40 (do
-         (reset! dingdong "Down")
-         (exercises/do-exercise :next))))
+  (condp = code
+    (:spacebar keycode) (exercises/go-with-the-flow)
+    (:left keycode)     (exercises/do-rep :prev)
+    (:up keycode)       (exercises/do-exercise :prev)
+    (:right keycode)    (exercises/do-rep :next)
+    (:down keycode)     (exercises/do-exercise :next)))
 
 (defn test-event [e]
   (let [code (or (.-which e)
                  (.-keyCode e))]
-    (when (in? code [32 37 38 39 40])
+    (when (in? code (vals keycode))
       (.preventDefault e)
       (handle-event code))))
 
