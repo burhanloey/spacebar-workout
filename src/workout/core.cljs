@@ -13,14 +13,6 @@
               :right    39
               :down     40})
 
-(defn workout-app []
-  [:div
-   [timer/timer-component]
-   [exercises/exercises-component]])
-
-(r/render-component [workout-app]
-                    (. js/document (getElementById "app")))
-
 (defn handle-event [code]
   (condp = code
     (:spacebar keycode) (exercises/go-with-the-flow)
@@ -37,6 +29,14 @@
       (handle-event code))))
 
 (set! (.-onkeydown js/document) onkeydown-listener)
+
+(defn workout-app []
+  [:div
+   [timer/timer-component]
+   [exercises/exercises-component]])
+
+(r/render-component [workout-app]
+                    (. js/document (getElementById "app")))
 
 ;; Figwheel related
 (defn on-js-reload []
