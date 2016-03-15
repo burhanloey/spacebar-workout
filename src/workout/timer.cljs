@@ -38,9 +38,12 @@
     (start-timer)))
 
 (defn timer-button []
-  [:button @button-text])
+  [:button.btn.btn-primary
+   {:on-click handle-click}
+   @button-text])
 
 (defn timer-component []
-  [:div
-   [:p "Timer: " @time-remaining]
-   [:p [timer-button]]])
+  [:div.panel.panel-default
+   [:div.panel-body
+    [:p "Timer: " @time-remaining]
+    [:p [timer-button]]]])

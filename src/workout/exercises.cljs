@@ -95,9 +95,14 @@
       :else (do-exercise :next))))
 
 (defn listing-names [stage & [type]]
-  [:ul
-   (for [exercise (get-all-exercises stage type)]
-     ^{:key exercise} [:li (str/capitalize (name exercise))])])
+  [:ul.list-group
+   (doall
+    (for [exercise (get-all-exercises stage type)]
+      ^{:key exercise} [:li.list-group-item
+                        {:class (if (= exercise @current-exercise)
+                                  "active"
+                                  "")}
+                        (str/capitalize (name exercise))]))])
 
 (defn exercises-list [stage & types]
   [:div

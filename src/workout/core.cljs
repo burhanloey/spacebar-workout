@@ -31,9 +31,12 @@
 (set! (.-onkeydown js/document) onkeydown-listener)
 
 (defn workout-app []
-  [:div
-   [timer/timer-component]
-   [exercises/exercises-component]])
+  [:div.container-fluid
+   [:div.col-md-3
+    [timer/timer-component]
+    [exercises/exercises-component]]
+   [:div.col-md-9
+    [:p "Some content should goes here."]]])
 
 (r/render-component [workout-app]
                     (. js/document (getElementById "app")))
