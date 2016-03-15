@@ -49,12 +49,13 @@
     1))
 
 (defn duration [name]
-  (condp #(in? %2 %1) name
-    ["l-sit"]                              90 ; 30s L-sit + 60s rest
-    (get-all-exercises :warmup :bodyline)  60
-    (get-all-exercises :strength)          60
-    (get-all-exercises :skill)            300
-    0))
+  (let [rest-time 60]
+    (condp #(in? %2 %1) name
+      ["l-sit"]                             (+ rest-time 30)
+      (get-all-exercises :warmup :bodyline) 60
+      (get-all-exercises :skill)            300
+      (get-all-exercises :strength)         rest-time
+      0)))
 
 (defn do-exercise [target]
   (let [find-target-while (case target
