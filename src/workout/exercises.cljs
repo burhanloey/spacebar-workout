@@ -49,7 +49,8 @@
     1))
 
 (defn duration [name]
-  (condp in? name
+  (condp #(in? %2 %1) name
+    ["l-sit"]                              30
     (get-all-exercises :warmup :bodyline)  60
     (get-all-exercises :strength)          60
     (get-all-exercises :skill)            300
@@ -82,6 +83,8 @@
                        (do-rep :next)
                        (timer/set-timer (duration target-exercise))))]
     (cond
+      (pos? @timer/time-remaining) (timer/handle-click)
+
       (and (last-exercise? @current-exercise)
            (= @current-rep (total-rep @current-exercise))) (next-group)
       
