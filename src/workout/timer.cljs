@@ -1,6 +1,5 @@
 (ns workout.timer
-  (:require [reagent.core :as r]
-            [workout.exercises :as exercises]))
+  (:require [reagent.core :as r]))
 
 (enable-console-print!)
 
@@ -22,7 +21,10 @@
   (stop-timer)
   (reset! time-remaining seconds))
 
-(defn start-timer []
+(defn has-time []
+  (pos? @time-remaining))
+
+(defn start-timer [callback]
   (when (pos? @time-remaining)
     (reset! button-text "Pause")
     (reset! updater (js/setInterval
@@ -31,13 +33,13 @@
                        (when-not (pos? @time-remaining)
                          (stop-timer)
                          (play-alarm)
-                         (exercises/do-next)))
+                         (callback)))
                      1000))))
 
-(defn handle-click []
+(defn handle-click [callback]
   (if @updater ; is ticking
     (stop-timer)
-    (start-timer)))
+    (start-timer callback)))
 
 (defn timer-button []
   [:button.btn.btn-primary

@@ -99,8 +99,8 @@
       :else (do-exercise :next))))
 
 (defn go-with-the-flow []
-  (if (pos? @timer/time-remaining)
-    (timer/handle-click)
+  (if (timer/has-time)
+    (timer/handle-click do-next)
     (do-next)))
 
 (defn exercises-list []
