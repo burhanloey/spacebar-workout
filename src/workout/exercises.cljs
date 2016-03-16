@@ -31,27 +31,33 @@
 (defonce current-exercise (r/atom nil))
 (defonce current-rep      (r/atom 1))
 
-(defn get-all-exercises [& keys]
-  (flatten (filter vector? (tree-seq map? vals (get-in all-exercises (remove nil? (apply vector keys)))))))
+(defn get-all-exercises [& keywords]
+  (flatten (filter vector? (tree-seq map? vals (get-in all-exercises (remove nil? (apply vector keywords)))))))
 
 (defn get-exercises-by-group []
   (filter vector? (tree-seq map? vals all-exercises)))
 
-(defn last-exercise? [name]
-  (in? name (map last (get-exercises-by-group))))
+(defn get-sibling-exercises [exercise-name]
+  (reduce vector (filter #(in? exercise-name %) (get-exercises-by-group))))
 
-(defn first-exercise-from [name]
-  (apply first (filter #(in? name %) (get-exercises-by-group))))
+(defn get-stage [exercise-name]
+  (reduce identity (filter #(in? exercise-name (get-all-exercises %)) (keys all-exercises))))
 
-(defn total-rep [name]
-  (if (in? name (get-all-exercises :strength))
+(defn last-exercise? [exercise-name]
+  (in? exercise-name (map last (get-exercises-by-group))))
+
+(defn first-exercise-from [exercise-name]
+  (apply first (filter #(in? exercise-name %) (get-exercises-by-group))))
+
+(defn total-rep [exercise-name]
+  (if (in? exercise-name (get-all-exercises :strength))
     3
     1))
 
-(defn duration [name]
+(defn duration [exercise-name]
   (let [rest-time 60]
-    (condp #(in? %2 %1) name
-      ["l-sit"]                             (+ rest-time 30)
+    (condp #(in? %2 %1) exercise-name
+      ["l-sit"]                             (+ 30 rest-time)
       (get-all-exercises :warmup :bodyline) 60
       (get-all-exercises :skill)            300
       (get-all-exercises :strength)         rest-time
@@ -94,31 +100,20 @@
       
       :else (do-exercise :next))))
 
-(defn listing-names [stage & [type]]
-  [:ul.list-group
-   (doall
-    (for [exercise (get-all-exercises stage type)]
-      ^{:key exercise} [:li.list-group-item
-                        {:class (if (= exercise @current-exercise)
-                                  "active"
-                                  "")}
-                        (str/capitalize (name exercise))]))])
-
-(defn exercises-list [stage & types]
+(defn exercises-list []
   [:div
-   [:h2 (str/capitalize (name stage))]
-   (if-not types
-     [:p
-      [listing-names stage]]
-     (for [type types]
-       ^{:key type} [:p
-                     [:h3 (str/capitalize (name type))]
-                     [listing-names stage type]]))])
+   [:h2 (if-not (nil? @current-exercise)
+          (str/capitalize (name (get-stage @current-exercise))))]
+   [:ul.list-group
+    (doall
+     (for [exercise (get-sibling-exercises @current-exercise)]
+       ^{:key exercise} [:li.list-group-item
+                         {:class (if (= exercise @current-exercise)
+                                   "active")}
+                         (str/capitalize (name exercise))]))]])
 
 (defn exercises-component []
   [:div
    [:p "Current exercise: " @current-exercise]
    [:p "Current rep: " @current-rep]
-   [exercises-list :warmup :stretches :bodyline]
-   [exercises-list :skill]
-   [exercises-list :strength :first :second :third]])
+   [exercises-list]])
