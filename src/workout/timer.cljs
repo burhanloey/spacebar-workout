@@ -1,5 +1,6 @@
 (ns workout.timer
-  (:require [reagent.core :as r]))
+  (:require [reagent.core :as r]
+            [workout.exercises :as exercises]))
 
 (enable-console-print!)
 
@@ -29,7 +30,8 @@
                        (swap! time-remaining dec)
                        (when-not (pos? @time-remaining)
                          (stop-timer)
-                         (play-alarm)))
+                         (play-alarm)
+                         (exercises/do-next)))
                      1000))))
 
 (defn handle-click []

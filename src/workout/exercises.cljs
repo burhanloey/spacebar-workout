@@ -81,7 +81,7 @@
     :next (reset! current-rep (inc (mod @current-rep (total-rep @current-exercise))))
     :prev (reset! current-rep (inc (mod (- @current-rep 2) (total-rep @current-exercise))))))
 
-(defn go-with-the-flow []
+(defn do-next []
   (let [next-group (fn []
                      (do-exercise :next)
                      (reset! current-rep 1))
@@ -91,14 +91,17 @@
                        (do-rep :next)
                        (timer/set-timer (duration target-exercise))))]
     (cond
-      (pos? @timer/time-remaining) (timer/handle-click)
-
       (and (last-exercise? @current-exercise)
            (= @current-rep (total-rep @current-exercise))) (next-group)
       
       (last-exercise? @current-exercise) (next-rep)
       
       :else (do-exercise :next))))
+
+(defn go-with-the-flow []
+  (if (pos? @timer/time-remaining)
+    (timer/handle-click)
+    (do-next)))
 
 (defn exercises-list []
   [:div
