@@ -1,32 +1,33 @@
 (ns workout.exercises
   (:require [reagent.core :as r]
             [clojure.string :as str]
+            [clojure.set :as set]
             [workout.timer :as timer]
             [workout.utils :refer [in?]]))
 
 (enable-console-print!)
 
-(def all-exercises {:warmup   {:stretches ["wall extensions"
-                                           "band dislocates"
-                                           "cat-camels" 
-                                           "scapular shrugs"
-                                           "full body circles"
-                                           "front and side leg swings"
-                                           "wrist mobility"]
-                               :bodyline  ["plank"
-                                           "side plank - right"
-                                           "side plank - left"
-                                           "reverse plank"
-                                           "hollow hold"
-                                           "arch hold"]}
-                    :skill    ["handstand"
-                               "support"]
-                    :strength {:first     ["pullup"
-                                           "dipping"]
-                               :second    ["squat"
-                                           "l-sit"]
-                               :third     ["pushup"
-                                           "row"]}})
+(def all-exercises {:warmup   {:stretches ["Wall extensions"
+                                           "Band dislocates"
+                                           "Cat-camels" 
+                                           "Scapular shrugs"
+                                           "Full body circles"
+                                           "Front and side leg swings"
+                                           "Wrist mobility"]
+                               :bodyline  ["Plank"
+                                           "Side plank - right"
+                                           "Side plank - left"
+                                           "Reverse plank"
+                                           "Hollow hold"
+                                           "Arch hold"]}
+                    :skill    ["Handstand"
+                               "Support"]
+                    :strength {:first     ["Pullup"
+                                           "Dipping"]
+                               :second    ["Squat"
+                                           "L-sit"]
+                               :third     ["Pushup"
+                                           "Row"]}})
 
 (defonce current-exercise (r/atom nil))
 (defonce current-rep      (r/atom 1))
@@ -42,6 +43,12 @@
 
 (defn get-stage [exercise-name]
   (reduce identity (filter #(in? exercise-name (get-all-exercises %)) (keys all-exercises))))
+
+(defn get-type [exercise-name]
+  (let [stage (get-stage exercise-name)
+        types (stage all-exercises)]
+    (when (map? types)
+      (reduce identity (filter #(in? exercise-name (% types)) (keys types))))))
 
 (defn last-exercise? [exercise-name]
   (in? exercise-name (map last (get-exercises-by-group))))
@@ -109,6 +116,10 @@
     [:div
      [:h2 (when-not (nil? now)
             (str/capitalize (name (get-stage now))))]
+     [:h3 (when-not (nil? now)
+            (let [type (get-type now)]
+              (when-not (nil? type)
+                (str/capitalize (name type)))))]
      [:ul.nav.nav-pills.nav-stacked
       (doall
        (for [exercise (get-sibling-exercises now)]
@@ -116,7 +127,7 @@
                            {:role "presentation"
                             :class (when (= exercise now)
                                      "active")}
-                           [:a (str/capitalize exercise)]]))]]))
+                           [:a exercise]]))]]))
 
 (defn exercises-component []
   [:div
