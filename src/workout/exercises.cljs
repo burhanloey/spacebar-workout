@@ -73,7 +73,7 @@
                               :next (first (get-all-exercises))
                               :prev (last (get-all-exercises))))]
     (reset! current-exercise target-exercise)
-    (reset! current-rep (inc (mod (dec @current-rep) (total-rep target-exercise))))
+    (reset! current-rep (inc (mod (dec @current-rep) (total-rep target-exercise)))) ; to be within total rep
     (timer/set-timer (duration target-exercise))))
 
 (defn do-rep [target]
@@ -82,19 +82,20 @@
     :prev (reset! current-rep (inc (mod (- @current-rep 2) (total-rep @current-exercise))))))
 
 (defn do-next []
-  (let [next-group (fn []
+  (let [now        @current-exercise
+        next-group (fn []
                      (do-exercise :next)
                      (reset! current-rep 1))
         next-rep   (fn []
-                     (let [target-exercise (first-exercise-from @current-exercise)]
+                     (let [target-exercise (first-exercise-from now)]
                        (reset! current-exercise target-exercise)
                        (do-rep :next)
                        (timer/set-timer (duration target-exercise))))]
     (cond
-      (and (last-exercise? @current-exercise)
-           (= @current-rep (total-rep @current-exercise))) (next-group)
+      (and (last-exercise? now)
+           (= @current-rep (total-rep now))) (next-group)
       
-      (last-exercise? @current-exercise) (next-rep)
+      (last-exercise? now) (next-rep)
       
       :else (do-exercise :next))))
 
@@ -104,16 +105,17 @@
     (do-next)))
 
 (defn exercises-list []
-  [:div
-   [:h2 (if-not (nil? @current-exercise)
-          (str/capitalize (name (get-stage @current-exercise))))]
-   [:ul.list-group
-    (doall
-     (for [exercise (get-sibling-exercises @current-exercise)]
-       ^{:key exercise} [:li.list-group-item
-                         {:class (if (= exercise @current-exercise)
-                                   "active")}
-                         (str/capitalize (name exercise))]))]])
+  (let [now @current-exercise]
+    [:div
+     [:h2 (if-not (nil? now)
+            (str/capitalize (name (get-stage now))))]
+     [:ul.list-group
+      (doall
+       (for [exercise (get-sibling-exercises now)]
+         ^{:key exercise} [:li.list-group-item
+                           {:class (when (= exercise now)
+                                     "active")}
+                           (str/capitalize exercise)]))]]))
 
 (defn exercises-component []
   [:div
