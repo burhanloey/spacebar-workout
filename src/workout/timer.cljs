@@ -24,7 +24,7 @@
 (defn has-time []
   (pos? @time-remaining))
 
-(defn start-timer [callback]
+(defn start-timer [& {on-finished :on-finished}]
   (when (pos? @time-remaining)
     (reset! button-text "Pause")
     (reset! updater (js/setInterval
@@ -33,13 +33,13 @@
                        (when-not (pos? @time-remaining)
                          (stop-timer)
                          (play-alarm)
-                         (callback)))
+                         (on-finished)))
                      1000))))
 
-(defn handle-click [callback]
+(defn handle-click [& {on-finished :on-finished}]
   (if @updater ; is ticking
     (stop-timer)
-    (start-timer callback)))
+    (start-timer :on-finished on-finished)))
 
 (defn timer-button []
   [:button.btn.btn-primary

@@ -101,7 +101,7 @@
 
 (defn go-with-the-flow []
   (if (timer/has-time)
-    (timer/handle-click do-next)
+    (timer/handle-click :on-finished do-next)
     (do-next)))
 
 (defn exercises-list []
