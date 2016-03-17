@@ -43,7 +43,6 @@
 
 (defn timer-button []
   [:button.btn.btn-primary
-   {:on-click handle-click}
    @button-text])
 
 (defn timer-component []

@@ -107,7 +107,7 @@
 (defn exercises-list []
   (let [now @current-exercise]
     [:div
-     [:h2 (if-not (nil? now)
+     [:h2 (when-not (nil? now)
             (str/capitalize (name (get-stage now))))]
      [:ul.list-group
       (doall
