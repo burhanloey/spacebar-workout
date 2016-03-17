@@ -109,13 +109,14 @@
     [:div
      [:h2 (when-not (nil? now)
             (str/capitalize (name (get-stage now))))]
-     [:ul.list-group
+     [:ul.nav.nav-pills.nav-stacked
       (doall
        (for [exercise (get-sibling-exercises now)]
-         ^{:key exercise} [:li.list-group-item
-                           {:class (when (= exercise now)
+         ^{:key exercise} [:li
+                           {:role "presentation"
+                            :class (when (= exercise now)
                                      "active")}
-                           (str/capitalize exercise)]))]]))
+                           [:a (str/capitalize exercise)]]))]]))
 
 (defn exercises-component []
   [:div

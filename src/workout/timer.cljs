@@ -42,11 +42,16 @@
     (start-timer :on-finished on-finished)))
 
 (defn timer-button []
-  [:button.btn.btn-primary
-   @button-text])
+  (let [current-text @button-text]
+    [:button.btn.btn-primary
+     [:span.glyphicon
+      {:class (if (= current-text "Start")
+                "glyphicon-play"
+                "glyphicon-pause")}]
+     " " current-text]))
 
 (defn timer-component []
   [:div.panel.panel-default
-   [:div.panel-body
-    [:p "Timer: " @time-remaining]
+   [:div.panel-body.text-center
+    [:p @time-remaining]
     [:p [timer-button]]]])

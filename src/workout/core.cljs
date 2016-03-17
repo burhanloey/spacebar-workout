@@ -33,6 +33,7 @@
 (defn workout-app []
   [:div.container-fluid
    [:div.col-md-3
+    {:role "navigation"}
     [timer/timer-component]
     [exercises/exercises-component]]
    [:div.col-md-9
