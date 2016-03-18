@@ -37,7 +37,7 @@
     [timer/timer-component]
     [exercises/exercises-component]]
    [:div.col-md-9
-    [:p "Some content should goes here."]]])
+    [contents/content-component]]])
 
 (r/render-component [workout-app]
                     (. js/document (getElementById "app")))
