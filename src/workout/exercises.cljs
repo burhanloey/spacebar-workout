@@ -64,7 +64,7 @@
 (defn duration [exercise-name]
   (let [rest-time 60]
     (condp #(in? %2 %1) exercise-name
-      ["l-sit"]                             (+ 30 rest-time)
+      ["L-sit"]                             (+ 30 rest-time)
       (get-all-exercises :warmup :bodyline) 60
       (get-all-exercises :skill)            300
       (get-all-exercises :strength)         rest-time
