@@ -25,7 +25,8 @@
                     :strength {:first     ["Pullup"
                                            "Dipping"]
                                :second    ["Squat"
-                                           "L-sit"]
+                                           "L-sit"
+                                           "Rest from L-sit"]
                                :third     ["Pushup"
                                            "Row"]}})
 
@@ -64,7 +65,7 @@
 (defn duration [exercise-name]
   (let [rest-time 60]
     (condp #(in? %2 %1) exercise-name
-      ["L-sit"]                             (+ 30 rest-time)
+      ["L-sit"]                             30
       (get-all-exercises :warmup :bodyline) 60
       (get-all-exercises :skill)            300
       (get-all-exercises :strength)         rest-time
