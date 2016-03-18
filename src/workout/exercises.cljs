@@ -21,7 +21,8 @@
                                            "Hollow hold"
                                            "Arch hold"]}
                     :skill    ["Handstand"
-                               "Support"]
+                               "Support"
+                               "Rest from skill work"]
                     :strength {:first     ["Pullup"
                                            "Dipping"]
                                :second    ["Squat"
@@ -65,10 +66,12 @@
 (defn duration [exercise-name]
   (let [rest-time 60]
     (condp #(in? %2 %1) exercise-name
-      ["L-sit"]                             30
-      (get-all-exercises :warmup :bodyline) 60
-      (get-all-exercises :skill)            300
-      (get-all-exercises :strength)         rest-time
+      ["L-sit"]                                  30
+      ["Handstand"]                              300
+      ["Support"]                                180
+      ["Rest from skill work" "Rest from L-sit"] rest-time
+      (get-all-exercises :warmup :bodyline)      60
+      (get-all-exercises :strength)              rest-time
       0)))
 
 (defn do-exercise [target]
