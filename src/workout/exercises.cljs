@@ -135,6 +135,5 @@
 
 (defn exercises-component []
   [:div
-   [:p "Current exercise: " @current-exercise]
    [:p "Current rep: " @current-rep]
    [exercises-list]])
