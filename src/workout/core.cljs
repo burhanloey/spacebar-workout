@@ -1,5 +1,6 @@
 (ns workout.core
   (:require [reagent.core :as r]
+            [workout.nav :as nav]
             [workout.timer :as timer]
             [workout.exercises :as exercises]
             [workout.contents :as contents]
@@ -31,13 +32,15 @@
 (set! (.-onkeydown js/document) onkeydown-listener)
 
 (defn workout-app []
-  [:div.container-fluid
-   [:div.col-md-3
-    {:role "navigation"}
-    [timer/timer-component]
-    [exercises/exercises-component]]
-   [:div.col-md-9
-    [contents/content-component]]])
+  [:div
+   [nav/navbar]
+   [:div.container-fluid
+    [:div.col-md-3
+     {:role "navigation"}
+     [timer/timer-component]
+     [exercises/exercises-component]]
+    [:div.col-md-9
+     [contents/content-component]]]])
 
 (r/render-component [workout-app]
                     (. js/document (getElementById "app")))
