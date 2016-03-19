@@ -41,17 +41,26 @@
     (stop-timer)
     (start-timer :on-finished on-finished)))
 
+(defn timer []
+  (let [time            @time-remaining
+        [minute second] [(quot time 60) (rem time 60)]]
+    [:p
+     (if (zero? minute)
+       (str second "s")
+       (str minute "m " second "s"))]))
+
 (defn timer-button []
   (let [current-text @button-text]
-    [:button.btn.btn-primary
-     [:span.glyphicon
-      {:class (if (= current-text "Start")
-                "glyphicon-play"
-                "glyphicon-pause")}]
-     " " current-text]))
+    [:p
+     [:button.btn.btn-primary
+      [:span.glyphicon
+       {:class (if (= current-text "Start")
+                 "glyphicon-play"
+                 "glyphicon-pause")}]
+      " " current-text]]))
 
 (defn timer-component []
   [:div.panel.panel-default
    [:div.panel-body.text-center
-    [:p @time-remaining]
-    [:p [timer-button]]]])
+    [timer]
+    [timer-button]]])
