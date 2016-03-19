@@ -115,8 +115,9 @@
     (do-next)))
 
 (defn rep []
-  (when-not (= 1 (total-rep @current-exercise))
-    [:p "Current rep: " @current-rep]))
+  (let [total (total-rep @current-exercise)]
+    (when-not (= 1 total)
+      [:small "Rep: " @current-rep "/" total])))
 
 (defn exercises-list []
   (let [now @current-exercise]
@@ -137,6 +138,4 @@
                            [:a exercise]]))]]))
 
 (defn exercises-component []
-  [:div
-   [rep]
-   [exercises-list]])
+  [exercises-list])

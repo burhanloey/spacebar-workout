@@ -40,20 +40,6 @@
                    "Row"                       {:desc "3x5-8 row + 60s rest"
                                                 :youtube "dvkIaarnf0g"}})
 
-(defn youtube [now]
-  (let [id (get-in content-data [now :youtube])]
-    (when-not (nil? id)
-      [:div.col-md-offset-1.col-md-10
-       [:div.embed-responsive.embed-responsive-16by9
-        [:iframe.embed-responsive-item
-         {:src (str "https://www.youtube.com/embed/" id)}]]])))
-
-(defn contents [now]
-  [:div.text-center
-     [:h1 now]
-     [:h2 (get-in content-data [now :desc])]
-     [youtube now]])
-
 (defn instructions []
   [:div.jumbotron
    [:h1.text-center "Instructions"]
@@ -76,8 +62,22 @@
     [:button.btn.btn-primary [:span.glyphicon.glyphicon-arrow-right]]
     " Go to next rep"]])
 
+(defn youtube [title]
+  (let [id (get-in content-data [title :youtube])]
+    (when-not (nil? id)
+      [:div.col-md-offset-1.col-md-10
+       [:div.embed-responsive.embed-responsive-16by9
+        [:iframe.embed-responsive-item
+         {:src (str "https://www.youtube.com/embed/" id)}]]])))
+
+(defn contents [title]
+  [:div.text-center
+     [:h1 title " " [exercises/rep]]
+     [:h2 (get-in content-data [title :desc])]
+     [youtube title]])
+
 (defn content-component []
-  (let [now @exercises/current-exercise]
-    (if (nil? now)
+  (let [title @exercises/current-exercise]
+    (if (nil? title)
       [instructions]
-      [contents now])))
+      [contents title])))
