@@ -44,7 +44,7 @@
 (defn timer []
   (let [time            @time-remaining
         [minute second] [(quot time 60) (rem time 60)]]
-    [:p
+    [:p.lead
      (if (zero? minute)
        (str second "s")
        (str minute "m " second "s"))]))

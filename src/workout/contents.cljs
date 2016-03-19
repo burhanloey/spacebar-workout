@@ -48,9 +48,36 @@
         [:iframe.embed-responsive-item
          {:src (str "https://www.youtube.com/embed/" id)}]]])))
 
-(defn content-component []
-  (let [now @exercises/current-exercise]
-    [:div.text-center
+(defn contents [now]
+  [:div.text-center
      [:h1 now]
      [:h2 (get-in content-data [now :desc])]
-     [youtube now]]))
+     [youtube now]])
+
+(defn instructions []
+  [:div.jumbotron
+   [:h1.text-center "Instructions"]
+   [:p.text-center
+    "This workout routine is meant to be done 3 times a week, with at least one rest day in between workout days. If you are new to bodyweight fitness, please read the progressions before attempting any of the exercise."]
+   [:h2.text-center "Controls:"]
+   [:p.text-center
+    [:button.btn.btn-primary "Spacebar"]
+    " Pretty much do everything"]
+   [:p.col-md-offset-4
+    [:button.btn.btn-primary [:span.glyphicon.glyphicon-arrow-up]]
+    " Go to previous exercise"]
+   [:p.col-md-offset-4
+    [:button.btn.btn-primary [:span.glyphicon.glyphicon-arrow-down]]
+    " Go to next exercise"]
+   [:p.col-md-offset-4
+    [:button.btn.btn-primary [:span.glyphicon.glyphicon-arrow-left]]
+    " Go to previous rep"]
+   [:p.col-md-offset-4
+    [:button.btn.btn-primary [:span.glyphicon.glyphicon-arrow-right]]
+    " Go to next rep"]])
+
+(defn content-component []
+  (let [now @exercises/current-exercise]
+    (if (nil? now)
+      [instructions]
+      [contents now])))
