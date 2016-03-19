@@ -119,6 +119,10 @@
     (when-not (= 1 total)
       [:small "Rep: " @current-rep "/" total])))
 
+(defn home []
+  [:p.text-center.lead
+   "Hit 'spacebar' to get started"])
+
 (defn exercises-list []
   (let [now @current-exercise]
     [:div
@@ -138,4 +142,6 @@
                            [:a exercise]]))]]))
 
 (defn exercises-component []
-  [exercises-list])
+  (if (nil? @current-exercise)
+    [home]
+    [exercises-list]))
