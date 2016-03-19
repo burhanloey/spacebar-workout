@@ -114,6 +114,10 @@
     (timer/handle-click :on-finished do-next)
     (do-next)))
 
+(defn rep []
+  (when-not (= 1 (total-rep @current-exercise))
+    [:p "Current rep: " @current-rep]))
+
 (defn exercises-list []
   (let [now @current-exercise]
     [:div
@@ -134,5 +138,5 @@
 
 (defn exercises-component []
   [:div
-   [:p "Current rep: " @current-rep]
+   [rep]
    [exercises-list]])
