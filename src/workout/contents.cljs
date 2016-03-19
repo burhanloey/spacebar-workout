@@ -42,9 +42,9 @@
 
 (defn instructions []
   [:div.jumbotron
-   [:h1.text-center "Instructions"]
+   [:h1.text-center "How to use this site?"]
    [:p.text-center
-    "This workout routine is meant to be done 3 times a week, with at least one rest day in between workout days. If you are new to bodyweight fitness, please read the progressions before attempting any of the exercise."]
+    "Just hit spacebar to go through the routine. The spacebar will also start the timer. Use the arrow keys if you need to skip some exercise."]
    [:h2.text-center "Controls:"]
    [:p.text-center
     [:button.btn.btn-primary "Spacebar"]
