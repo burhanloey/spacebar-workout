@@ -26,18 +26,18 @@
                    "Support"                   {:desc "3 minutes including rest"
                                                 :youtube "8gmyhBScTLk"}
                    "Rest from skill work"      {:desc "60s"}
-                   "Pullup"                    {:desc "3x5-8 pullup + 60s rest"
+                   "Pullup"                    {:desc "3x5-8 pullups + 60s rest"
                                                 :youtube "RsnbDcsZbpk"}
-                   "Dipping"                   {:desc "3x5-8 dip + 60s rest"
+                   "Dipping"                   {:desc "3x5-8 dips + 60s rest"
                                                 :youtube "ddEeZY_ii2c"}
-                   "Squat"                     {:desc "3x5-8 squat + 60s rest"
+                   "Squat"                     {:desc "3x5-8 squats + 60s rest"
                                                 :youtube "487aR3A7HvM"}
                    "L-sit"                     {:desc "60s hold"
                                                 :youtube "IUZJoSP66HI"}
                    "Rest from L-sit"           {:desc "60s"}
-                   "Pushup"                    {:desc "3x5-8 pushup + 60s rest"
+                   "Pushup"                    {:desc "3x5-8 pushups + 60s rest"
                                                 :youtube "4dF1DOWzf20"}
-                   "Row"                       {:desc "3x5-8 row + 60s rest"
+                   "Row"                       {:desc "3x5-8 rows + 60s rest"
                                                 :youtube "dvkIaarnf0g"}})
 
 (defn instructions []
