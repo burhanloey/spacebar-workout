@@ -74,6 +74,7 @@
 (defn resources []
   [:div.jumbotron.text-center
    [:h1 "Resources"]
+   [:h2 "Websites"]
    [:p
     [:a {:href "https://www.reddit.com/r/bodyweightfitness/wiki/kb/recommended_routine"} "Recommended Routine"]
     " - Reddit's r/bodyweightfitness recommended routine"]
