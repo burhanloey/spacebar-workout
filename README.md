@@ -2,7 +2,7 @@
 
 Assistive website for my workout routine.
 
-## See it in action!
+## See it live!
 
 Link: [http://www.burhanloey.com/workout](http://www.burhanloey.com/workout)
 
