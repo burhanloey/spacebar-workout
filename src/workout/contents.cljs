@@ -65,13 +65,29 @@
     " Go to next rep"]])
 
 (defn progressions []
-  [:p "Progressions"])
+  [:div
+   [:h1.text-center "Progressions"]])
 
 (defn resources []
-  [:p "Resources"])
+  [:div.jumbotron.text-center
+   [:h1 "Resources"]
+   [:p
+    [:a {:href "https://www.reddit.com/r/bodyweightfitness/wiki/kb/recommended_routine"}
+     "Recommended Routine"]
+    " - Reddit's r/bodyweightfitness recommended routine"]
+   [:h2 "Alternatives"]
+   [:p
+    [:a {:href "https://fitloop.co/"}
+     "Fitloop"]
+    " - Website with similar goals"]
+   [:p
+    [:a {:href "http://www.timer-tab.com/"}
+     "Timer Tab"]
+    " - Online timer"]])
 
 (defn about []
-  [:p "About"])
+  [:div
+   [:h1.text-center "About"]])
 
 (defn youtube [title]
   (let [id (get-in content-data [title :youtube])]
