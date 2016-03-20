@@ -8,17 +8,13 @@
     [:div.navbar-header
      [:a.navbar-brand "burhanloey's workout"]]
     [:ul.nav.navbar-nav.navbar-right
-     [:li [:a
-           {:on-click #(contents/set-content :contents)}
+     [:li [:a {:on-click #(contents/set-content :contents)}
            [:span.glyphicon.glyphicon-home] " Home"]]
-     [:li [:a
-           {:on-click #(contents/set-content :progressions)}
+     [:li [:a {:on-click #(contents/set-content :progressions)}
            [:span.glyphicon.glyphicon-list] " Progressions"]]
-     [:li [:a
-           {:on-click #(contents/set-content :resources)}
+     [:li [:a {:on-click #(contents/set-content :resources)}
            [:span.glyphicon.glyphicon-book] " Resources"]]
-     [:li [:a
-           {:on-click #(contents/set-content :about)}
+     [:li [:a {:on-click #(contents/set-content :about)}
            [:span.glyphicon.glyphicon-info-sign] " About"]]]]])
 
 (defn footer []
