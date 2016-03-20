@@ -1,8 +1,8 @@
 (defproject workout "0.1.0-SNAPSHOT"
-  :description "FIXME: write this!"
-  :url "http://example.com/FIXME"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :description "burhanloey's workout routine"
+  :url "http://www.burhanloey.com/workout"
+  :license {:name "The MIT License (MIT)"
+            :url "https://opensource.org/licenses/MIT"}
 
   :min-lein-version "2.5.3"
   
