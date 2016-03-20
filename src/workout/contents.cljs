@@ -43,26 +43,20 @@
 (defonce current-content (r/atom :contents))
 
 (defn instructions []
-  [:div.jumbotron
-   [:h1.text-center "How to use this site?"]
-   [:p.text-center
-    "Just hit spacebar to go through the routine. The spacebar will also start the timer. Use the arrow keys if you need to skip some exercise."]
-   [:h2.text-center "Controls:"]
-   [:p.text-center
-    [:button.btn.btn-primary "Spacebar"]
-    " Pretty much do everything"]
-   [:p.col-md-offset-4
-    [:button.btn.btn-primary [:span.glyphicon.glyphicon-arrow-up]]
-    " Go to previous exercise"]
-   [:p.col-md-offset-4
-    [:button.btn.btn-primary [:span.glyphicon.glyphicon-arrow-down]]
-    " Go to next exercise"]
-   [:p.col-md-offset-4
-    [:button.btn.btn-primary [:span.glyphicon.glyphicon-arrow-left]]
-    " Go to previous rep"]
-   [:p.col-md-offset-4
-    [:button.btn.btn-primary [:span.glyphicon.glyphicon-arrow-right]]
-    " Go to next rep"]])
+  (let [control (fn [icon desc]
+                  [:p.col-md-offset-4
+                   [:button.btn.btn-primary [:span.glyphicon {:class icon}]]
+                   " " desc])]
+    [:div.jumbotron
+     [:h1.text-center "How to use this site?"]
+     [:p.text-center
+      "Just hit spacebar to go through the routine. The spacebar will also start the timer. Use the arrow keys if you need to skip some exercise."]
+     [:h2.text-center "Controls:"]
+     [:p.text-center [:button.btn.btn-primary "Spacebar"] " Pretty much do everything"]
+     [control "glyphicon-arrow-up"   "Go to previous exercise"]
+     [control "glyphicon-arrow-down" "Go to next exercise"]
+     [control "glyphicon-arrow-left" "Go to previous rep"]
+     [control "glyphicon-arrow-left" "Go to next rep"]]))
 
 (defn progressions []
   (let [url "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/"]
@@ -81,17 +75,12 @@
   [:div.jumbotron.text-center
    [:h1 "Resources"]
    [:p
-    [:a {:href "https://www.reddit.com/r/bodyweightfitness/wiki/kb/recommended_routine"}
-     "Recommended Routine"]
+    [:a {:href "https://www.reddit.com/r/bodyweightfitness/wiki/kb/recommended_routine"} "Recommended Routine"]
     " - Reddit's r/bodyweightfitness recommended routine"]
    [:h2 "Alternatives"]
-   [:p
-    [:a {:href "https://fitloop.co/"}
-     "Fitloop"]
+   [:p [:a {:href "https://fitloop.co/"} "Fitloop"]
     " - Website with similar goals"]
-   [:p
-    [:a {:href "http://www.timer-tab.com/"}
-     "Timer Tab"]
+   [:p [:a {:href "http://www.timer-tab.com/"} "Timer Tab"]
     " - Online timer"]])
 
 (defn about []
