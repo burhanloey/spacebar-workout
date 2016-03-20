@@ -65,8 +65,17 @@
     " Go to next rep"]])
 
 (defn progressions []
-  [:div
-   [:h1.text-center "Progressions"]])
+  (let [url "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/"]
+    [:div.jumbotron.text-center
+     [:h1 "Progressions"]
+     [:p [:a {:href (str url "handstand")} "Handstand progression"]]
+     [:p [:a {:href (str url "support")}   "Support practice progression"]]
+     [:p [:a {:href (str url "pullup")}    "Pullup progression"]]
+     [:p [:a {:href (str url "dip")}       "Dipping progression"]]
+     [:p [:a {:href (str url "squat")}     "Squat progression"]]
+     [:p [:a {:href (str url "l-sit")}     "L-sit progression"]]
+     [:p [:a {:href (str url "pushup")}    "Pushup progression"]]
+     [:p [:a {:href (str url "row")}       "Row progression"]]]))
 
 (defn resources []
   [:div.jumbotron.text-center
