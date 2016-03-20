@@ -93,7 +93,20 @@
    [:p "The source code for this website is available in my GitHub repo."]])
 
 (defn privacy []
-  [:h1.text-center "Privacy Policy"])
+  [:div.lead
+   [:h1 "Privacy Policy"]
+   [:p "This website uses Google Analytics to track visitors."]
+   [:p [:b "What does Google Analytics track?"]]
+   [:ul
+    [:li "Which website you came from"]
+    [:li "Time spent on pages"]
+    [:li "Visitor browser, operating system, and approximate city"]
+    [:li "Etc."]]
+   [:p "Google Analytics does NOT track any personal information such as names, email addresses, etc."]
+   [:p [:b "What do the data used for?"]]
+   [:p "The tracking information helps to improve the website and to keep track of the visitor count."]
+   [:p [:b "How to opt out of tracking?"]]
+   [:p "Use something like " [:a {:href "https://tools.google.com/dlpage/gaoptout"} "Google's opt-out browser plugin"] " or " [:a {:href "https://disconnect.me"} "Disconnect"] "."]])
 
 (defn youtube [title]
   (let [id (get-in content-data [title :youtube])]
