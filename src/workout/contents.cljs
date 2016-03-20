@@ -59,17 +59,17 @@
      [control "glyphicon-arrow-right" "Go to next rep"]]))
 
 (defn progressions []
-  (let [url "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/"]
+  (let [url "https://www.reddit.com/r/bodyweightfitness/wiki/exercises"]
     [:div.jumbotron.text-center
      [:h1 "Progressions"]
-     [:p [:a {:href (str url "handstand")} "Handstand progression"]]
-     [:p [:a {:href (str url "support")}   "Support practice progression"]]
-     [:p [:a {:href (str url "pullup")}    "Pullup progression"]]
-     [:p [:a {:href (str url "dip")}       "Dipping progression"]]
-     [:p [:a {:href (str url "squat")}     "Squat progression"]]
-     [:p [:a {:href (str url "l-sit")}     "L-sit progression"]]
-     [:p [:a {:href (str url "pushup")}    "Pushup progression"]]
-     [:p [:a {:href (str url "row")}       "Row progression"]]]))
+     [:p [:a {:href (str url "/handstand")} "Handstand progression"]]
+     [:p [:a {:href (str url "/support")}   "Support practice progression"]]
+     [:p [:a {:href (str url "/pullup")}    "Pullup progression"]]
+     [:p [:a {:href (str url "/dip")}       "Dipping progression"]]
+     [:p [:a {:href (str url "/squat")}     "Squat progression"]]
+     [:p [:a {:href (str url "/l-sit")}     "L-sit progression"]]
+     [:p [:a {:href (str url "/pushup")}    "Pushup progression"]]
+     [:p [:a {:href (str url "/row")}       "Row progression"]]]))
 
 (defn resources []
   [:div.jumbotron.text-center
@@ -84,10 +84,12 @@
     " - Online timer"]])
 
 (defn about []
-  [:div.jumbotron
+  [:div.jumbotron.text-justify
    [:h1.text-center "About"]
-   [:p
-    "This is a website, duh!"]])
+   [:p "Hi!"]
+   [:p "This website is for anyone looking for a timer to do the workout routine recommended by " [:a {:href "https://www.reddit.com/r/bodyweightfitness/"} "r/bodyweightfitness"] "."]
+   [:p "Most of the other similar websites only provide a timer that you have to manually configure. With all the sweats produced during the workout, I can't just touch my keyboard to configure the timer. Therefore, I made this website that only requires user to just hit the spacebar."]
+   [:p "The source code for this website is available in my GitHub repo."]])
 
 (defn privacy []
   [:h1.text-center "Privacy Policy"])
