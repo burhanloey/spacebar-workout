@@ -20,3 +20,9 @@
      [:li [:a
            {:on-click #(contents/set-content :about)}
            [:span.glyphicon.glyphicon-info-sign] " About"]]]]])
+
+(defn footer []
+  [:footer.footer
+   [:div.container
+    [:p.text-muted.text-center
+     "Home • GitHub • Privacy • About"]]])

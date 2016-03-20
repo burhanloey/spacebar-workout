@@ -40,7 +40,8 @@
      [timer/timer-component]
      [exercises/exercises-component]]
     [:div.col-md-9
-     [contents/content-component]]]])
+     [contents/content-component]]]
+   [nav/footer]])
 
 (r/render-component [workout-app]
                     (. js/document (getElementById "app")))

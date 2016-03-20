@@ -48,15 +48,15 @@
                    [:button.btn.btn-primary [:span.glyphicon {:class icon}]]
                    " " desc])]
     [:div.jumbotron
-     [:h1.text-center "How to use this site?"]
+     [:h1.text-center "How to use this website?"]
      [:p.text-center
       "Just hit spacebar to go through the routine. The spacebar will also start the timer. Use the arrow keys if you need to skip some exercise."]
      [:h2.text-center "Controls:"]
      [:p.text-center [:button.btn.btn-primary "Spacebar"] " Pretty much do everything"]
-     [control "glyphicon-arrow-up"   "Go to previous exercise"]
-     [control "glyphicon-arrow-down" "Go to next exercise"]
-     [control "glyphicon-arrow-left" "Go to previous rep"]
-     [control "glyphicon-arrow-left" "Go to next rep"]]))
+     [control "glyphicon-arrow-up"    "Go to previous exercise"]
+     [control "glyphicon-arrow-down"  "Go to next exercise"]
+     [control "glyphicon-arrow-left"  "Go to previous rep"]
+     [control "glyphicon-arrow-right" "Go to next rep"]]))
 
 (defn progressions []
   (let [url "https://www.reddit.com/r/bodyweightfitness/wiki/exercises/"]
@@ -84,8 +84,13 @@
     " - Online timer"]])
 
 (defn about []
-  [:div
-   [:h1.text-center "About"]])
+  [:div.jumbotron
+   [:h1.text-center "About"]
+   [:p
+    "This is a website, duh!"]])
+
+(defn privacy []
+  [:h1.text-center "Privacy Policy"])
 
 (defn youtube [title]
   (let [id (get-in content-data [title :youtube])]
@@ -114,4 +119,5 @@
     :progressions [progressions]
     :resources    [resources]
     :about        [about]
+    :privacy      [privacy]
     :contents     [contents @exercises/current-exercise]))
