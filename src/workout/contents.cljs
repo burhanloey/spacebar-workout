@@ -90,7 +90,7 @@
    [:p "Hi!"]
    [:p "This website is for anyone looking for a timer to do the workout routine recommended by " [:a {:href "https://www.reddit.com/r/bodyweightfitness/"} "r/bodyweightfitness"] "."]
    [:p "Most of the other similar websites only provide a timer that you have to manually configure. With all the sweats produced during the workout, I can't just touch my keyboard to configure the timer. Therefore, I made this website that only requires user to just hit the spacebar."]
-   [:p "The source code for this website is available in my GitHub repo."]])
+   [:p "The source code for this website is available in my " [:a {:href "https://github.com/burhanloey/workout"} "GitHub repo"] ". Feel free to star or fork this project."]])
 
 (defn privacy []
   [:div.lead
