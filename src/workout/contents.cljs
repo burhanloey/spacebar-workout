@@ -40,6 +40,8 @@
                    "Row"                       {:desc "3x5-8 rows + 60s rest"
                                                 :youtube "dvkIaarnf0g"}})
 
+(defonce current-content (r/atom :contents))
+
 (defn instructions []
   [:div.jumbotron
    [:h1.text-center "How to use this site?"]
@@ -62,6 +64,15 @@
     [:button.btn.btn-primary [:span.glyphicon.glyphicon-arrow-right]]
     " Go to next rep"]])
 
+(defn progressions []
+  [:p "Progressions"])
+
+(defn resources []
+  [:p "Resources"])
+
+(defn about []
+  [:p "About"])
+
 (defn youtube [title]
   (let [id (get-in content-data [title :youtube])]
     (when-not (nil? id)
@@ -70,14 +81,23 @@
         [:iframe.embed-responsive-item
          {:src (str "https://www.youtube.com/embed/" id)}]]])))
 
-(defn contents [title]
+(defn exercise-info [title]
   [:div.text-center
      [:h1 title " " [exercises/rep]]
      [:h2 (get-in content-data [title :desc])]
      [youtube title]])
 
+(defn contents [title]
+  (if (nil? title)
+    [instructions]
+    [exercise-info title]))
+
+(defn set-content [page]
+  (reset! current-content page))
+
 (defn content-component []
-  (let [title @exercises/current-exercise]
-    (if (nil? title)
-      [instructions]
-      [contents title])))
+  (case @current-content
+    :progressions [progressions]
+    :resources    [resources]
+    :about        [about]
+    :contents     [contents @exercises/current-exercise]))
