@@ -20,5 +20,8 @@
 (defn footer []
   [:footer.footer
    [:div.container
-    [:p.text-muted.text-center
-     "Home • GitHub • Privacy • About"]]])
+    [:p.text-center.footer-links
+     [:a.text-muted {:on-click #(contents/set-content :contents)} "Home"] " • "
+     [:a.text-muted {:href "#"} "GitHub"] " • "
+     [:a.text-muted {:on-click #(contents/set-content :privacy)} "Privacy"] " • "
+     [:a.text-muted {:on-click #(contents/set-content :about)} "About"]]]])
