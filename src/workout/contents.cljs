@@ -44,7 +44,7 @@
 
 (defn instructions []
   (let [control (fn [icon desc]
-                  [:p.col-md-offset-4
+                  [:p.col-sm-offset-4
                    [:button.btn.btn-primary [:span.glyphicon {:class icon}]]
                    " " desc])]
     [:div.jumbotron
@@ -111,7 +111,7 @@
 (defn youtube [title]
   (let [id (get-in content-data [title :youtube])]
     (when-not (nil? id)
-      [:div.col-md-offset-1.col-md-10
+      [:div.col-sm-offset-1.col-sm-10
        [:div.embed-responsive.embed-responsive-16by9
         [:iframe.embed-responsive-item
          {:src (str "https://www.youtube.com/embed/" id)}]]])))
