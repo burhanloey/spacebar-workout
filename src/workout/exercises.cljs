@@ -84,7 +84,9 @@
                               :prev (last (get-all-exercises))))]
     (reset! current-exercise target-exercise)
     (reset! current-rep (inc (mod (dec @current-rep) (total-rep target-exercise)))) ; to be within total rep
-    (timer/set-timer (duration target-exercise))))
+    (timer/set-timer (duration target-exercise))
+    (when (nil? target-exercise)
+      (timer/set-text "Get Started"))))
 
 (defn do-rep [target]
   (case target

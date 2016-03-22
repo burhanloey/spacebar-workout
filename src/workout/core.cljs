@@ -37,7 +37,10 @@
    [:div.container-fluid
     [:div.col-md-3
      {:role "navigation"}
-     [timer/timer-component]
+     [timer/timer-component
+      :doall-fn #(exercises/go-with-the-flow)
+      :back-fn  #(exercises/do-exercise :prev)
+      :skip-fn  #(exercises/do-exercise :next)]
      [exercises/exercises-component]]
     [:div.col-md-9
      [contents/content-component]]]

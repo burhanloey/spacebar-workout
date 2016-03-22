@@ -51,6 +51,8 @@
      [:h1.text-center "How to use this website?"]
      [:p.text-center
       "Just hit spacebar to go through the routine. The spacebar will also start the timer. Use the arrow keys if you need to skip some exercise."]
+     [:p.text-center
+      "Alternatively, you can use the buttons at the timer."]
      [:h2.text-center "Controls:"]
      [:p.text-center [:button.btn.btn-primary "Spacebar"] " Pretty much do everything"]
      [control "glyphicon-arrow-up"    "Go to previous exercise"]
