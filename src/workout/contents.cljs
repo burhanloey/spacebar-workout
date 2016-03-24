@@ -127,7 +127,8 @@
      {:src (str "https://www.youtube.com/embed/" id "?enablejsapi=1&origin=http://www.burhanloey.com")}]]])
 
 (defn youtube-did-mount []
-  (reset! player (js/YT.Player. "player")))
+  (let [Player (.-Player js/YT)]
+    (reset! player (Player. "player"))))
 
 (defn youtube [id]
   (r/create-class {:reagent-render (fn [id]

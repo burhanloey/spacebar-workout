@@ -37,6 +37,7 @@
                {:id "min"
                 :source-paths ["src"]
                 :compiler {:output-to "resources/public/js/compiled/workout.js"
+                           :externs ["youtube-iframe-api-externs.js"]
                            :main workout.core
                            :optimizations :advanced
                            :pretty-print false}}]}
