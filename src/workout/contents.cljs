@@ -25,19 +25,19 @@
                                                 :youtube "N3K9SMNKL7Y"}
                    "Support"                   {:desc "3 minutes including rest"
                                                 :youtube "8gmyhBScTLk"}
-                   "Rest from skill work"      {:desc "60s"}
-                   "Pullup"                    {:desc "5-8 pullups + 60s rest"
+                   "Rest from skill work"      {:desc "90s"}
+                   "Pullup"                    {:desc "5-8 pullups + 90s rest"
                                                 :youtube "RsnbDcsZbpk"}
-                   "Dipping"                   {:desc "5-8 dips + 60s rest"
+                   "Dipping"                   {:desc "5-8 dips + 90s rest"
                                                 :youtube "ddEeZY_ii2c"}
-                   "Squat"                     {:desc "5-8 squats + 60s rest"
+                   "Squat"                     {:desc "5-8 squats + 90s rest"
                                                 :youtube "487aR3A7HvM"}
                    "L-sit"                     {:desc "60s hold"
                                                 :youtube "IUZJoSP66HI"}
-                   "Rest from L-sit"           {:desc "60s"}
-                   "Pushup"                    {:desc "5-8 pushups + 60s rest"
+                   "Rest from L-sit"           {:desc "90s"}
+                   "Pushup"                    {:desc "5-8 pushups + 90s rest"
                                                 :youtube "4dF1DOWzf20"}
-                   "Row"                       {:desc "5-8 rows + 60s rest"
+                   "Row"                       {:desc "5-8 rows + 90s rest"
                                                 :youtube "dvkIaarnf0g"}})
 
 (defonce current-content (r/atom :contents))

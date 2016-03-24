@@ -64,7 +64,7 @@
     1))
 
 (defn duration [exercise-name]
-  (let [rest-time 60]
+  (let [rest-time 90]
     (condp #(in? %2 %1) exercise-name
       ["Handstand"]                              300
       ["Support"]                                180
