@@ -8,7 +8,8 @@
 
 (enable-console-print!)
 
-(def keycode {:spacebar 32
+(def keycode {:enter    13
+              :spacebar 32
               :left     37
               :up       38
               :right    39
@@ -16,6 +17,7 @@
 
 (defn handle-event [code]
   (condp = code
+    (:enter keycode)    (contents/play-video)
     (:spacebar keycode) (exercises/go-with-the-flow)
     (:left keycode)     (exercises/do-rep :prev)
     (:up keycode)       (exercises/do-exercise :prev)

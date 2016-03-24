@@ -41,12 +41,14 @@
                                                 :youtube "dvkIaarnf0g"}})
 
 (defonce current-content (r/atom :contents))
+(defonce player          (r/atom nil))
 
 (defn instructions []
   (let [control (fn [icon desc]
-                  [:p.col-sm-offset-4
-                   [:button.btn.btn-primary [:span.glyphicon {:class icon}]]
-                   " " desc])]
+                  [:p.row
+                   [:span.col-sm-offset-3.col-sm-2.text-right
+                    [:button.btn.btn-primary [:span.glyphicon {:class icon}]]]
+                   [:span.col-sm-7 desc]])]
     [:div.jumbotron
      [:h1.text-center "How to use this website?"]
      [:p.text-center
@@ -54,11 +56,14 @@
      [:p.text-center
       "Alternatively, you can use the buttons at the timer."]
      [:h2.text-center "Controls:"]
-     [:p.text-center [:button.btn.btn-primary "Spacebar"] " Pretty much do everything"]
-     [control "glyphicon-arrow-up"    "Go to previous exercise"]
-     [control "glyphicon-arrow-down"  "Go to next exercise"]
-     [control "glyphicon-arrow-left"  "Go to previous rep"]
-     [control "glyphicon-arrow-right" "Go to next rep"]]))
+     [:p.row
+      [:span.col-sm-offset-3.col-sm-2.text-right [:button.btn.btn-primary "Spacebar"]]
+      [:span.col-sm-7 "Pretty much do everything"]]
+     [:p.row
+      [:span.col-sm-offset-3.col-sm-2.text-right [:button.btn.btn-primary "Enter"]]
+      [:span.col-sm-7 "Play video"]]
+     [control "glyphicon-arrow-up"    "Back"]
+     [control "glyphicon-arrow-down"  "Skip"]]))
 
 (defn progressions []
   (let [url "https://www.reddit.com/r/bodyweightfitness/wiki/exercises"]
@@ -110,19 +115,32 @@
    [:p [:b "How to opt out of tracking?"]]
    [:p "Use something like " [:a {:href "https://tools.google.com/dlpage/gaoptout"} "Google's opt-out browser plugin"] " or " [:a {:href "https://disconnect.me"} "Disconnect"] "."]])
 
-(defn youtube [title]
-  (let [id (get-in content-data [title :youtube])]
-    (when-not (nil? id)
-      [:div.col-sm-offset-1.col-sm-10
-       [:div.embed-responsive.embed-responsive-16by9
-        [:iframe.embed-responsive-item
-         {:src (str "https://www.youtube.com/embed/" id)}]]])))
+(defn play-video []
+  (when (and (= @current-content :contents)
+             (get-in content-data [@exercises/current-exercise :youtube]))
+    (.playVideo @player)))
+
+(defn youtube-render [id]
+  [:div.col-sm-offset-1.col-sm-10
+   [:div.embed-responsive.embed-responsive-16by9
+    [:iframe#player.embed-responsive-item
+     {:src (str "https://www.youtube.com/embed/" id "?enablejsapi=1&origin=http://www.burhanloey.com")}]]])
+
+(defn youtube-did-mount []
+  (reset! player (js/YT.Player. "player")))
+
+(defn youtube [id]
+  (r/create-class {:reagent-render (fn [id]
+                                     [youtube-render id])
+                   :component-did-mount youtube-did-mount}))
 
 (defn exercise-info [title]
-  [:div.text-center
-   [:h1 title " " [exercises/rep]]
-   [:h2 (get-in content-data [title :desc])]
-   [youtube title]])
+  (let [id (get-in content-data [title :youtube])]
+    [:div.text-center
+     [:h1 title " " [exercises/rep]]
+     [:h2 (get-in content-data [title :desc])]
+     (when-not (nil? id)
+       [youtube id])]))
 
 (defn contents [title]
   (if (nil? title)
