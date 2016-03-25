@@ -68,6 +68,7 @@
     (condp #(in? %2 %1) exercise-name
       ["Handstand"]                              300
       ["Support"]                                180
+      ["L-sit"]                                  60
       ["Rest from skill work" "Rest from L-sit"] rest-time
       (get-all-exercises :warmup :bodyline)      60
       (get-all-exercises :strength)              rest-time
