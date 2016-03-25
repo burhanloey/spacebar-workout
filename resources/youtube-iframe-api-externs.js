@@ -1,3 +1,6 @@
+/** @const */
+var YT = {};
+
 /**
  * @constructor
  * @param {(string|Element)} container
