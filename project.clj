@@ -14,9 +14,9 @@
   
   :plugins [[lein-figwheel "0.5.0-6"]
             [lein-cljsbuild "1.1.2" :exclusions [[org.clojure/clojure]]]
-            [cljs-simple-cache-buster "0.1.0"]]
+            [cljs-simple-cache-buster "0.1.1"]]
 
-  :cljs-simple-cache-buster {:cljsbuild-id "min"
+  :cljs-simple-cache-buster {:cljsbuild-id ["min"]
                              :template-file "resources/template/index.html"
                              :output-to "resources/public/index.html"}
 
