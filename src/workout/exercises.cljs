@@ -20,14 +20,14 @@
                                            "Reverse plank"
                                            "Hollow hold"
                                            "Arch hold"]}
-                    :skill    ["Handstand"
-                               "Support"
+                    :skill    ["Support"
+                               "Handstand"
                                "Rest from skill work"]
                     :strength {:first     ["Pullup"
                                            "Dipping"]
-                               :second    ["Squat"
-                                           "L-sit"
-                                           "Rest from L-sit"]
+                               :second    ["L-sit"
+                                           "Rest from L-sit"
+                                           "Squat"]
                                :third     ["Pushup"
                                            "Row"]}})
 
