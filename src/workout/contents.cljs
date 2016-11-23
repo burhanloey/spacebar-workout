@@ -6,7 +6,7 @@
                    "Band dislocates"           {:youtube "WyW5jGGxoZk"}
                    "Cat-camels"                {:youtube "K9bK0BwKFjs"}
                    "Scapular shrugs"           {:youtube "akgQbxhrhOc"}
-                   "Full body circles"         {:youtube "yRigKuEou7k"}
+                   "Full body circles"         {:youtube "ABfOXAuJ0WE"}
                    "Front and side leg swings" {:youtube "4aoUZEZFJF8"}
                    "Wrist mobility"            {:youtube "mSZWSQSSEjE"}
                    "Plank"                     {:desc "60s hold"
