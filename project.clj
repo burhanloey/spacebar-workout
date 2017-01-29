@@ -1,6 +1,6 @@
 (defproject workout "0.1.0-SNAPSHOT"
   :description "burhanloey's workout routine"
-  :url "http://www.burhanloey.com/workout"
+  :url "https://github.com/burhanloey/spacebar-workout"
   :license {:name "The MIT License (MIT)"
             :url "https://opensource.org/licenses/MIT"}
 
