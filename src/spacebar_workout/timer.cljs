@@ -1,10 +1,10 @@
-(ns workout.timer
+(ns spacebar-workout.timer
   (:require [reagent.core :as r]
-            [workout.utils :refer [in?]]))
+            [spacebar-workout.utils :refer [in?]]))
 
 (enable-console-print!)
 
-(def alarm (r/atom (js/Audio. "../audio/alarm2.mp3")))
+(def alarm (r/atom (js/Audio. "audio/alarm2.mp3")))
 
 (defonce time-remaining (r/atom 0))
 (defonce updater        (r/atom nil))

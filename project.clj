@@ -1,4 +1,4 @@
-(defproject workout "0.1.0-SNAPSHOT"
+(defproject spacebar-workout "0.1.0-SNAPSHOT"
   :description "burhanloey's workout routine"
   :url "https://github.com/burhanloey/spacebar-workout"
   :license {:name "The MIT License (MIT)"
@@ -29,11 +29,11 @@
                 :source-paths ["src"]
 
                 ;; If no code is to be run, set :figwheel true for continued automagical reloading
-                :figwheel {:on-jsload "workout.core/on-js-reload"}
+                :figwheel {:on-jsload "spacebar-workout.core/on-js-reload"}
 
-                :compiler {:main workout.core
+                :compiler {:main spacebar-workout.core
                            :asset-path "js/compiled/out"
-                           :output-to "resources/public/js/compiled/workout.js"
+                           :output-to "resources/public/js/compiled/spacebar_workout.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true}}
                ;; This next build is an compressed minified build for
@@ -41,9 +41,9 @@
                ;; lein cljsbuild once min
                {:id "min"
                 :source-paths ["src"]
-                :compiler {:output-to "resources/public/js/compiled/workout.js"
+                :compiler {:output-to "resources/public/js/compiled/spacebar_workout.js"
                            :externs ["youtube-iframe-api-externs.js"]
-                           :main workout.core
+                           :main spacebar-workout.core
                            :optimizations :advanced
                            :pretty-print false}}]}
 

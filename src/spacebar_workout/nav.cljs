@@ -1,6 +1,6 @@
-(ns workout.nav
+(ns spacebar-workout.nav
   (:require [reagent.core :as r]
-            [workout.contents :as contents]))
+            [spacebar-workout.contents :as contents]))
 
 (defn navbar []
   [:nav.navbar.navbar-default
@@ -22,6 +22,6 @@
    [:div.container
     [:p.text-center.footer-links
      [:a.text-muted {:on-click #(contents/set-content :contents)} "Home"] " • "
-     [:a.text-muted {:href "https://github.com/burhanloey/workout"} "GitHub"] " • "
+     [:a.text-muted {:href "https://github.com/burhanloey/spacebar-workout"} "GitHub"] " • "
      [:a.text-muted {:on-click #(contents/set-content :privacy)} "Privacy"] " • "
      [:a.text-muted {:on-click #(contents/set-content :about)} "About"]]]])

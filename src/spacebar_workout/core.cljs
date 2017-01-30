@@ -1,10 +1,10 @@
-(ns workout.core
+(ns spacebar-workout.core
   (:require [reagent.core :as r]
-            [workout.nav :as nav]
-            [workout.timer :as timer]
-            [workout.exercises :as exercises]
-            [workout.contents :as contents]
-            [workout.utils :refer [in?]]))
+            [spacebar-workout.nav :as nav]
+            [spacebar-workout.timer :as timer]
+            [spacebar-workout.exercises :as exercises]
+            [spacebar-workout.contents :as contents]
+            [spacebar-workout.utils :refer [in?]]))
 
 (enable-console-print!)
 
@@ -33,7 +33,7 @@
 
 (set! (.-onkeydown js/document) onkeydown-listener)
 
-(defn workout-app []
+(defn spacebar-workout-app []
   [:div
    [nav/navbar]
    [:div.container-fluid
@@ -48,7 +48,7 @@
      [contents/content-component]]]
    [nav/footer]])
 
-(r/render-component [workout-app]
+(r/render-component [spacebar-workout-app]
                     (. js/document (getElementById "app")))
 
 ;; Figwheel related

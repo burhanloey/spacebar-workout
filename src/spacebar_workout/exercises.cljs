@@ -1,9 +1,9 @@
-(ns workout.exercises
+(ns spacebar-workout.exercises
   (:require [reagent.core :as r]
             [clojure.string :as str]
             [clojure.set :as set]
-            [workout.timer :as timer]
-            [workout.utils :refer [in?]]))
+            [spacebar-workout.timer :as timer]
+            [spacebar-workout.utils :refer [in?]]))
 
 (enable-console-print!)
 
