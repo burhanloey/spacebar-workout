@@ -4,7 +4,7 @@ Assistive website for my workout routine.
 
 ## See it live!
 
-Link: [http://workout.burhanloey.com](http://workout.burhanloey.com)
+Link: [http://www.burhanloey.com/spacebar-workout](http://www.burhanloey.com/spacebar-workout)
 
 ## Setup
 
